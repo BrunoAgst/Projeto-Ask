@@ -1,0 +1,16 @@
+{
+  "name": "perguntas_respostas",
+  "version": "1.0.0",
+  "description": "Uma plataforma de perguntas e resposta, como se fosse o yahoo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Bruno Augusto",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1"
+  }
+}
