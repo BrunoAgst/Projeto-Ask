@@ -1,6 +1,17 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const connection = require("./database/database");
+
+//database connection
+connection
+    .authenticate()
+    .then(() => {
+        console.log("Success Connection")
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 
 // Estou dizendo para o express usar o EJS como view(rederizar o html)
 app.set("view engine","ejs");
