@@ -1,38 +1,23 @@
-<!DOCTYPE html>
-<html lang="ptBr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perguntas</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css"> <!-- Sempre carregar seu css depois do bootstrap-->
-</head>
+<%- include ('./partials/header.ejs') %> <!--incluindo partials-->
 <body>
-    <nav class="navbar navbar-light bg-primary">
-        <a href="/" class="navbar-brand">
-            <img src="/img/home.png">
-        </a>
-    </nav>
+    <%- include ('./partials/navbar.ejs') %>
     <div class="container">
         <div class="card" id="form-question">
             <div class="card-header">
                 <h3>Escreva sua pergunta</h3>
             </div>
             <div class="card-body">
-                <forms>
+                <form method="POST" action="/salvarpergunta">
                     <label>Título</label><!--Label serve para descrever o que o campo faz-->
-                    <input type="text" placeholder="Título" class="form-control">
+                    <input name="titulo" type="text" placeholder="Título" class="form-control">
                     <br>
                     <label>Descrição</label>
-                    <textarea placeholder="Descreva sua pergunta aqui" class="form-control"></textarea>
+                    <textarea name="descricao" placeholder="Descreva sua pergunta aqui" class="form-control"></textarea>
                     <br>
                     <button class="btn btn-primary">Enviar</button>
-                </forms>
+                </form>
             </div>
         </div>        
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="/js/bootstrap.min.js"></script>
-</html>
+<%- include ('./partials/footer.ejs') %>
