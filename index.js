@@ -30,9 +30,9 @@ app.get("/",(req, res) => {
     //pegar os dados do banco e rederizar no front end do site
     Pergunta.findAll({ raw: true, order:[ //ordenando as perguntas pelo id
         ['id', 'DESC'] //DESC: decrescente e ASC: crescente 
-    ]}).then(perguntas =>{
+    ]}).then(pergunta =>{
         res.render("index", {
-            perguntas: perguntas
+            perguntas: pergunta
         });
     }); 
 });
@@ -52,6 +52,21 @@ app.post("/salvarpergunta", (req, res) => {
     }).then(() => {
         res.redirect("/"); //caso o usuário tenha sido criado com sucesso usamos a função redirect para enviar para a página principal
     })
+});
+
+app.get("/pergunta/:id",(req, res) => {
+    var id = req.params.id;
+    Pergunta.findOne({ //findOne busca um único dado
+        where: {id: id}
+    }).then(pergunta => {
+        if(pergunta != undefined){ //realizar a verificação se o id existe no banco
+            res.render("pergunta",{
+                pergunta: pergunta     
+            });
+        }else{
+            res.redirect("/");
+        }
+    });
 });
 
 app.listen(3000, () =>{
