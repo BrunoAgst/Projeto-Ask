@@ -3,9 +3,28 @@
     <%- include ('./partials/navbar.ejs') %>
     <div class="container">
         <hr>
-        <h1><%= pergunta.title %></h1>
-        <p><%= pergunta.description %></p>
+        <h1><%= perguntas.title %></h1>
+        <p><%= perguntas.description %></p>
         <hr>
+        <form method="POST" action="/responder">
+            <h3>Responda</h3>
+            <label>Resposta</label>
+            <textarea placeholder="Digite sua resposta" class="form-control" name="corpo"></textarea>
+            <br>
+            <input type="hidden" name="perguntaId" value="<%= perguntas.id %>"><!-- irá receber o ID da pergunta-->
+            <button type="submit" class="btn btn-primary">Responder</button>
+        </form>
+        <hr>
+        <h3>Respostas</h3>
+        <hr>
+        <% respostas.forEach(resposta => { %>
+            <div class="card">
+                <div class="card-body">
+                    <%= resposta.body %>
+                </div>
+            </div>
+            <br>
+        <% }) %>
     </div>
 </body>
 <%- include ('./partials/footer.ejs') %>

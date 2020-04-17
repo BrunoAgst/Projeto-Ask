@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const connection = require("./database/database");
 const Pergunta = require("./database/Perguntas"); //só pelo fato de estar importado no index.js o código de criação de tabela já é executado
+const Resposta = require('./database/Resposta');
 // model é representação de uma tabela com código javascript
 
 
@@ -60,12 +61,34 @@ app.get("/pergunta/:id",(req, res) => {
         where: {id: id}
     }).then(pergunta => {
         if(pergunta != undefined){ //realizar a verificação se o id existe no banco
-            res.render("pergunta",{
-                pergunta: pergunta     
-            });
+            //fazendo a busca no banco para carregar as respostas
+
+            Resposta.findAll({
+                where: {questionID: pergunta.id},
+                order: [
+                    ['id', 'DESC']
+                ]
+            }).then(resposta => {
+                res.render("pergunta",{
+                    perguntas: pergunta, 
+                    respostas: resposta    
+                });
+            })
         }else{
             res.redirect("/");
         }
+    });
+});
+
+app.post("/responder", (req, res) => {
+    var corpo = req.body.corpo;
+    var perguntaID = req.body.perguntaId;
+
+    Resposta.create({
+        body: corpo,
+        questionID: perguntaID
+    }).then(() => {
+        res.redirect("/pergunta/" + perguntaID)
     });
 });
 
